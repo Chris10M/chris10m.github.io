@@ -39,8 +39,7 @@
         <section class="hero" id="research">
           <div class="hero-text">
             <h2>
-              Building human-centered perception systems that bridge geometry,
-              learning, and embodied intelligence.
+              <span class="typewriter" data-text="Building human-centered perception systems that bridge geometry, learning, and embodied intelligence."></span>
             </h2>
             <p>
               I am a 3D computer vision researcher exploring how spatial
@@ -166,5 +165,32 @@
         <p>© 2025 Christen Millerdurai · Built for GitHub Pages</p>
       </footer>
     </div>
+    <script>
+      const typewriter = document.querySelector(".typewriter");
+      if (typewriter) {
+        const text = typewriter.dataset.text || "";
+        let index = 0;
+        const speed = 35;
+        const cursor = document.createElement("span");
+        cursor.className = "cursor";
+        cursor.textContent = "|";
+        typewriter.appendChild(cursor);
+
+        const type = () => {
+          if (index < text.length) {
+            typewriter.insertBefore(
+              document.createTextNode(text.charAt(index)),
+              cursor
+            );
+            index += 1;
+            setTimeout(type, speed);
+          } else {
+            cursor.classList.add("blink");
+          }
+        };
+
+        type();
+      }
+    </script>
   </body>
 </html>
