@@ -104,8 +104,18 @@ h3 {
 }
 
 .typewriter {
-  display: inline-block;
-  min-height: 3.2rem;
+  display: block;
+  position: relative;
+}
+
+.typewriter-placeholder {
+  display: block;
+  visibility: hidden;
+}
+
+.typewriter-text {
+  position: absolute;
+  inset: 0;
 }
 
 .cursor {
