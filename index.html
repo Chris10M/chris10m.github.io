@@ -303,21 +303,40 @@
           "text/html"
         );
         const rows = Array.from(documentParser.querySelectorAll(".gsc_a_tr"));
-        return rows.map((row) => {
-          const title =
-            row.querySelector(".gsc_a_at")?.textContent?.trim() || "Untitled";
-          const citationsText =
-            row.querySelector(".gsc_a_ac")?.textContent?.trim() || "0";
-          const citations = Number.parseInt(citationsText, 10) || 0;
-          const yearText =
-            row.querySelector(".gsc_a_h")?.textContent?.trim() ||
-            row.querySelector(".gsc_a_y")?.textContent?.trim() ||
-            "";
-          const year = Number.parseInt(yearText, 10) || null;
+        if (rows.length) {
+          return rows.map((row) => {
+            const title =
+              row.querySelector(".gsc_a_at")?.textContent?.trim() || "Untitled";
+            const citationsText =
+              row.querySelector(".gsc_a_ac")?.textContent?.trim() || "0";
+            const citations = Number.parseInt(citationsText, 10) || 0;
+            const yearText =
+              row.querySelector(".gsc_a_h")?.textContent?.trim() ||
+              row.querySelector(".gsc_a_y")?.textContent?.trim() ||
+              "";
+            const year = Number.parseInt(yearText, 10) || null;
+            return {
+              title,
+              citations,
+              year,
+            };
+          });
+        }
+
+        const publicationMatches = [
+          ...html.matchAll(
+            /\[(.+?)\]\(https?:\/\/scholar\\.google\\.com\/citations\\?[^)]+\\)/g
+          ),
+        ];
+        return publicationMatches.map((match) => {
+          const title = match[1]?.trim() || "Untitled";
+          const snippet = html.slice(match.index, match.index + 300);
+          const citationMatch = snippet.match(/Cited by\\s*(\\d+)/i);
+          const yearMatch = snippet.match(/\\b(19|20)\\d{2}\\b/);
           return {
             title,
-            citations,
-            year,
+            citations: citationMatch ? Number.parseInt(citationMatch[1], 10) : 0,
+            year: yearMatch ? Number.parseInt(yearMatch[0], 10) : null,
           };
         });
       };
@@ -414,7 +433,12 @@
             })
           );
           publications = enriched.filter((item) => item.title);
-          publicationsStatus.textContent = `Loaded ${publications.length} publications from Google Scholar.`;
+          if (publications.length) {
+            publicationsStatus.textContent = `Loaded ${publications.length} publications from Google Scholar.`;
+          } else {
+            publicationsStatus.textContent =
+              "No publications found yet. If this persists, the Google Scholar feed may be unavailable.";
+          }
           renderPublications();
         } catch (error) {
           publicationsStatus.textContent =
