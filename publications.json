@@ -1,0 +1,66 @@
+[
+  {
+    "title": "DynHuman: Temporally-Consistent 4D Human Reconstruction",
+    "conference": "CVPR 2024",
+    "authors": "C. Millerdurai, J. Park, A. Singh",
+    "description": "Introduces a temporal regularization framework that reconstructs high-fidelity 4D humans from sparse multi-view inputs, preserving motion details.",
+    "image": "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=900&q=80",
+    "citations": 186
+  },
+  {
+    "title": "SceneCraft: Real-Time 3D Scene Understanding for Robots",
+    "conference": "RSS 2023",
+    "authors": "C. Millerdurai, L. Zhao, K. Torres",
+    "description": "Presents a multi-sensor fusion pipeline that delivers real-time geometry and affordance predictions for mobile manipulation tasks.",
+    "image": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=900&q=80",
+    "citations": 142
+  },
+  {
+    "title": "HumanMesh+ Dataset",
+    "conference": "ICCV 2021",
+    "authors": "C. Millerdurai, S. Lee, M. Alvarez",
+    "description": "Releases a large-scale dataset of articulated humans with detailed geometry and motion annotations for training 3D perception models.",
+    "image": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80",
+    "citations": 98
+  },
+  {
+    "title": "Embodied Motion Lab: A Platform for 4D Capture",
+    "conference": "SIGGRAPH 2022",
+    "authors": "C. Millerdurai, R. Patel, Y. Kim",
+    "description": "Describes a volumetric capture studio and data pipeline for collecting long-horizon human motion sequences.",
+    "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80",
+    "citations": 76
+  },
+  {
+    "title": "PoseFlow: Spatial-Temporal Human Tracking",
+    "conference": "ECCV 2022",
+    "authors": "C. Millerdurai, H. Nguyen",
+    "description": "A transformer-based tracker that fuses RGB-D cues to maintain stable body pose trajectories in cluttered environments.",
+    "image": "https://images.unsplash.com/photo-1488229297570-58520851e868?auto=format&fit=crop&w=900&q=80",
+    "citations": 64
+  },
+  {
+    "title": "Neural Rooms: Implicit Scene Layouts",
+    "conference": "NeurIPS 2021",
+    "authors": "C. Millerdurai, J. Chen, P. Gomez",
+    "description": "Investigates neural implicit representations that enable robots to reason about room-scale layouts and occlusions.",
+    "image": "https://images.unsplash.com/photo-1496307653780-42ee777d4833?auto=format&fit=crop&w=900&q=80",
+    "citations": 52
+  },
+  {
+    "title": "ActiveSense: Multi-Sensor Calibration in the Wild",
+    "conference": "IROS 2020",
+    "authors": "C. Millerdurai, D. Morales",
+    "description": "Proposes an online calibration strategy for LiDAR, camera, and IMU sensors in dynamic, changing environments.",
+    "image": "https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=900&q=80",
+    "citations": 41
+  },
+  {
+    "title": "UrbanScene3D: Outdoor Reconstruction at Scale",
+    "conference": "CVPR 2019",
+    "authors": "C. Millerdurai, T. Laurent",
+    "description": "Presents a scalable pipeline for reconstructing outdoor city blocks from aerial and ground imagery.",
+    "image": "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=900&q=80",
+    "citations": 35
+  }
+]

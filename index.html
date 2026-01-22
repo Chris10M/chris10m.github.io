@@ -87,13 +87,13 @@
           <div class="section-title">
             <h2>Selected publications</h2>
             <p>
-              Automatically curated from Google Scholar. Showing the top three
-              by citations, with summaries generated from abstracts.
+              Curated highlights from recent work. Showing the top three by
+              citation count, with the full list available below.
             </p>
           </div>
           <div class="publications-header">
             <p class="publications-note" id="publications-status">
-              Loading publications…
+              Showing top three publications by citations.
             </p>
             <button class="button ghost" id="toggle-publications" type="button">
               More publications →
@@ -251,135 +251,28 @@
         type();
       }
 
-      const scholarUserId = "8p9OOd0AAAAJ";
       const publicationsList = document.getElementById("publications-list");
       const publicationsStatus = document.getElementById("publications-status");
       const toggleButton = document.getElementById("toggle-publications");
       let publications = [];
       let showAllPublications = false;
 
-      const stopwords = new Set([
-        "the",
-        "and",
-        "for",
-        "with",
-        "from",
-        "into",
-        "that",
-        "this",
-        "using",
-        "via",
-        "toward",
-        "towards",
-        "based",
-        "learning",
-        "model",
-        "models",
-        "scene",
-        "human",
-        "vision",
-        "robot",
-        "robots",
-      ]);
-
-      const buildImageUrl = (title) => {
-        const keywords = title
-          .split(/\s+/)
-          .map((word) => word.replace(/[^a-zA-Z]/g, "").toLowerCase())
-          .filter((word) => word.length > 3 && !stopwords.has(word))
-          .slice(0, 3);
-        const query = keywords.length ? keywords.join(",") : "3d,vision";
-        return `https://source.unsplash.com/featured/800x450/?${encodeURIComponent(
-          query
-        )}`;
-      };
-
-      const fetchScholarPublications = async () => {
-        const scholarUrl = `https://r.jina.ai/http://scholar.google.com/citations?user=${scholarUserId}&hl=en&cstart=0&pagesize=100`;
-        const response = await fetch(scholarUrl);
-        const html = await response.text();
-        const documentParser = new DOMParser().parseFromString(
-          html,
-          "text/html"
-        );
-        const rows = Array.from(documentParser.querySelectorAll(".gsc_a_tr"));
-        if (rows.length) {
-          return rows.map((row) => {
-            const title =
-              row.querySelector(".gsc_a_at")?.textContent?.trim() || "Untitled";
-            const citationsText =
-              row.querySelector(".gsc_a_ac")?.textContent?.trim() || "0";
-            const citations = Number.parseInt(citationsText, 10) || 0;
-            const yearText =
-              row.querySelector(".gsc_a_h")?.textContent?.trim() ||
-              row.querySelector(".gsc_a_y")?.textContent?.trim() ||
-              "";
-            const year = Number.parseInt(yearText, 10) || null;
-            return {
-              title,
-              citations,
-              year,
-            };
-          });
-        }
-
-        const publicationMatches = [
-          ...html.matchAll(
-            /\[(.+?)\]\(https?:\/\/scholar\\.google\\.com\/citations\\?[^)]+\\)/g
-          ),
-        ];
-        return publicationMatches.map((match) => {
-          const title = match[1]?.trim() || "Untitled";
-          const snippet = html.slice(match.index, match.index + 300);
-          const citationMatch = snippet.match(/Cited by\\s*(\\d+)/i);
-          const yearMatch = snippet.match(/\\b(19|20)\\d{2}\\b/);
-          return {
-            title,
-            citations: citationMatch ? Number.parseInt(citationMatch[1], 10) : 0,
-            year: yearMatch ? Number.parseInt(yearMatch[0], 10) : null,
-          };
-        });
-      };
-
-      const fetchSemanticDetails = async (title) => {
-        const fields =
-          "title,year,abstract,venue,url,openAccessPdf,externalIds";
-        const url = `https://api.semanticscholar.org/graph/v1/paper/search?query=${encodeURIComponent(
-          title
-        )}&limit=1&fields=${fields}`;
-        const response = await fetch(url);
-        if (!response.ok) {
-          return null;
-        }
-        const data = await response.json();
-        return data?.data?.[0] || null;
-      };
-
-      const summarizeAbstract = (abstractText) => {
-        if (!abstractText) {
-          return "Abstract unavailable. Summary generated from the publication title.";
-        }
-        const sentence = abstractText.split(". ").slice(0, 2).join(". ");
-        return sentence.endsWith(".") ? sentence : `${sentence}.`;
-      };
-
       const renderPublications = () => {
         if (!publicationsList) {
           return;
         }
         publicationsList.innerHTML = "";
-        const sorted = [...publications].sort((a, b) => {
-          if (showAllPublications) {
-            return (b.year || 0) - (a.year || 0);
-          }
-          return b.citations - a.citations;
-        });
-        const visible = showAllPublications ? sorted : sorted.slice(0, 3);
+        const sortedByCitations = [...publications].sort(
+          (a, b) => (b.citations || 0) - (a.citations || 0)
+        );
+        const visible = showAllPublications
+          ? publications
+          : sortedByCitations.slice(0, 3);
         visible.forEach((publication) => {
           const card = document.createElement("article");
           card.className = "publication-card";
           const image = document.createElement("img");
-          image.src = publication.imageUrl;
+          image.src = publication.image;
           image.alt = `Teaser for ${publication.title}`;
           image.loading = "lazy";
           const body = document.createElement("div");
@@ -387,17 +280,17 @@
           const title = document.createElement("h3");
           title.textContent = publication.title;
           const description = document.createElement("p");
-          description.textContent = publication.summary;
+          description.textContent = publication.description;
           const meta = document.createElement("div");
           meta.className = "publication-meta";
           const tag = document.createElement("span");
           tag.className = "tag";
-          tag.textContent = publication.year ? `Year ${publication.year}` : "Year";
-          const citation = document.createElement("span");
-          citation.className = "tag ghost";
-          citation.textContent = `${publication.citations} citations`;
+          tag.textContent = publication.conference;
+          const authors = document.createElement("span");
+          authors.className = "tag ghost";
+          authors.textContent = publication.authors;
           meta.appendChild(tag);
-          meta.appendChild(citation);
+          meta.appendChild(authors);
           body.appendChild(title);
           body.appendChild(description);
           body.appendChild(meta);
@@ -418,37 +311,22 @@
           return;
         }
         try {
-          const scholarPublications = await fetchScholarPublications();
-          const enriched = await Promise.all(
-            scholarPublications.map(async (publication) => {
-              const details = await fetchSemanticDetails(publication.title);
-              const abstractText = details?.abstract || "";
-              const summary = summarizeAbstract(abstractText);
-              return {
-                ...publication,
-                year: details?.year || publication.year,
-                summary,
-                imageUrl: buildImageUrl(publication.title),
-              };
-            })
-          );
-          publications = enriched.filter((item) => item.title);
-          if (publications.length) {
-            publicationsStatus.textContent = `Loaded ${publications.length} publications from Google Scholar.`;
-          } else {
-            publicationsStatus.textContent =
-              "No publications found yet. If this persists, the Google Scholar feed may be unavailable.";
-          }
+          const response = await fetch("publications.json");
+          publications = await response.json();
+          publicationsStatus.textContent = "Showing top three publications by citations.";
           renderPublications();
         } catch (error) {
           publicationsStatus.textContent =
-            "Unable to load publications automatically. Please check back later.";
+            "Unable to load publications. Please check back later.";
         }
       };
 
       if (toggleButton) {
         toggleButton.addEventListener("click", () => {
           showAllPublications = !showAllPublications;
+          publicationsStatus.textContent = showAllPublications
+            ? "Showing all publications in listed order."
+            : "Showing top three publications by citations.";
           renderPublications();
         });
       }
