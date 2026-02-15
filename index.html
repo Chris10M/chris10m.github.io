@@ -2,10 +2,11 @@
 <html lang="en">
 
 <head>
-  <title>Christen Millerdurai</title>
+  <title>Christen Millerdurai | Egocentric Vision & 3D Human Pose Estimation</title>
+  <meta name="description" content="Christen Millerdurai — Researcher and Ph.D. candidate at DFKI. I work on egocentric vision, event cameras, 3D human/hand pose estimation, and 3D scene reconstruction.">
+
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
   <meta name="author" content="Christen Millerdurai">
-  <meta name="description" content="Christen Millerdurai's Homepage">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="keywords" content="
   Egocentric, 3D, Human, Pose Estimation,
@@ -19,17 +20,16 @@
 
   <!-- Open Graph / Facebook -->
   <meta property="og:title" content="Christen Millerdurai">
-  <meta property="og:description"
-    content="Christen Millerdurai's Homepage - Ph.D. student at Deutsches Forschungszentrum für Künstliche Intelligenz (DFKI), specializing in Computer Vision and Deep Learning.">
+  <meta property="og:description" content="Researcher and Ph.D. candidate at DFKI. Egocentric vision, event cameras, 3D human/hand pose estimation, 3D scene reconstruction.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://chris10m.github.io/">
   <meta property="og:image" content="https://chris10m.github.io/images/profile_photo.jpg">
 
+
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Christen Millerdurai">
-  <meta name="twitter:description"
-    content="Christen Millerdurai's Homepage - Ph.D. student at Deutsches Forschungszentrum für Künstliche Intelligenz (DFKI), specializing in Computer Vision and Deep Learning.">
+  <meta name="twitter:description" content="Egocentric vision, event cameras, 3D human/hand pose estimation, 3D scene reconstruction.">
   <meta name="twitter:image" content="https://chris10m.github.io/images/profile_photo.jpg">
 
   <!-- <meta name="google-site-verification"
@@ -55,6 +55,7 @@
       const items = Array.from(document.querySelectorAll('.pub-item'));
       const toggle = document.getElementById('pub-toggle');
       const toggleRow = document.getElementById('pub-toggle-row');
+      const year = document.getElementById('copyright-year');
       const visibleCount = 3;
       let expanded = false;
 
@@ -81,8 +82,64 @@
         });
       }
 
+      if (year) {
+        year.textContent = String(new Date().getFullYear());
+      }
+
       update();
     });
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": "https://chris10m.github.io/#person",
+    "name": "Christen Millerdurai",
+    "url": "https://chris10m.github.io/",
+    "mainEntityOfPage": "https://chris10m.github.io/",
+    "image": "https://chris10m.github.io/images/profile_photo.jpg",
+    "description": "Researcher and Ph.D. candidate at DFKI working on egocentric vision, event cameras, 3D human/hand pose estimation, and 3D scene reconstruction.",
+    "jobTitle": "Researcher and Ph.D. candidate",
+    "email": "mailto:Christen.Millerdurai@dfki.de",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Deutsches Forschungszentrum für Künstliche Intelligenz (DFKI)",
+      "url": "https://www.dfki.de/en/web"
+    },
+    "affiliation": [
+      {
+        "@type": "Organization",
+        "name": "Augmented Vision Group, DFKI",
+        "url": "https://av.dfki.de/"
+      }
+    ],
+    "alumniOf": [
+      {
+        "@type": "Organization",
+        "name": "Saarland University",
+        "url": "https://www.uni-saarland.de/en/home.html"
+      },
+      {
+        "@type": "Organization",
+        "name": "St. Joseph's Institute of Technology",
+        "url": "https://www.stjosephstechnology.ac.in/"
+      }
+    ],
+    "knowsAbout": [
+      "Egocentric vision",
+      "3D human pose estimation",
+      "Hand pose estimation",
+      "3D scene reconstruction",
+      "Event cameras",
+      "Computer vision",
+      "Deep learning"
+    ],
+    "sameAs": [
+      "https://scholar.google.com/citations?user=8p9OOd0AAAAJ",
+      "https://www.linkedin.com/in/christen-m-6a1b12136",
+      "https://github.com/Chris10M"
+    ]
+  }
   </script>
 </head>
 
@@ -109,10 +166,11 @@
                     My research topic is 3D human pose estimation (including hands) and 3D scene reconstruction from
                     egocentric cameras. <img src="./images/glasses.png" width="14"> <img src="./images/headset.png" width="14"> 
                   </p>
+
                   <p>
                     Previously, I obtained my MS at Saarland University (SIC) advised by Prof. Dr. 
                     <a href="https://people.mpi-inf.mpg.de/~theobalt/">Christian Theobalt</a> on the topic of "3D Human Motion Capture from Egocentric Event Streams" 
-                    and my BE from St.Joseph's Institute of Technology advised by Prof. Dr. 
+                    and my BE from St. Joseph's Institute of Technology advised by Prof. Dr. 
                     <a href="https://www.stjosephstechnology.ac.in/web/ece/Kousalya.php">C. Gnana Kousalya</a> on the topic of "Visually Impaired Navigation With Artificial Intelligence".
                   </p>
                   
@@ -128,14 +186,16 @@
                 </td>
                 <!-- Profile image -->
                 <td style="padding:0.5%;width:25%;max-width:25%">
-                  <a href="images/profile_photo.jpg"><img style="width:100%;max-width:100%" alt="profile photo"
-                      src="images/profile_photo.jpg" class="hoverZoomLink"></a>
+                  <a href="images/profile_photo.jpg"><img style="width:100%;max-width:100%" alt="Portrait of Christen Millerdurai"
+                     loading="eager" decoding="async" fetchpriority="high"
+                     src="images/profile_photo.jpg" class="hoverZoomLink"></a>
                 </td>
               </tr>
 
 
           </table>
-
+          
+        </br>
           <!-- Image Gallery Section -->
           <table
             style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
@@ -148,7 +208,7 @@
 
                     <div style="flex:1;min-width:150px;text-align:center;">
                       <img src="./images/logo_dfki_av.png" alt="Deutsches Forschungszentrum für Künstliche Intelligenz (DFKI)"
-                        style="width:100%;max-width:250px;height:60px;object-fit:contain;border-radius:8px;">
+                        style="width:100%;max-width:250px;height:50px;object-fit:contain;border-radius:8px;">
                       <p style="margin-top:0px;font-size:14px;color:#666;">DFKI <br>
                         (2024-)</p>
                     </div>
@@ -163,13 +223,13 @@
                     
                     <div style="flex:1;min-width:150px;text-align:center;">
                       <img src="./images/SIC.png" alt="SIC"
-                        style="width:100%;max-width:250px;height:60px;object-fit:contain;border-radius:8px;">
+                        style="width:90%;max-width:250px;height:60px;object-fit:contain;border-radius:8px;">
                       <p style="margin-top:0px;font-size:14px;color:#666;">SIC <br> (2021-2024)</p>
                     </div>
 
                     <div style="flex:1;min-width:150px;text-align:center;">
                       <img src="./images/sjit.png" alt="SJIT"
-                        style="width:100%;max-width:250px;height:60px;object-fit:contain;border-radius:8px;">
+                        style="width:90%;max-width:250px;height:60px;object-fit:contain;border-radius:8px;">
                       <p style="margin-top:0px;font-size:14px;color:#666;">St.Joseph's Institute of Technology <br> (2014-2018)</p>
                     </div>
 
@@ -192,11 +252,11 @@
         <td style="padding:20px;width:100%;vertical-align:middle">
           <heading>News</heading>
           <p>
-            <b>[December 2025]</b> Two papers got published in WACV 2026.
+            <b>[December 2025]</b> Two papers got accepted in WACV 2026.
             <br>
             <b>[June 2025]</b> One paper got published in IJCV 2025.
             <br>
-            <b>[December 2024]</b> One paper got published in WACV 2025.
+            <b>[December 2024]</b> One paper got accepted in WACV 2025.
             <br>
             <b>[May 2024]</b> EventEgo3D was invited to a poster session in <a
               href="https://egovis.github.io/cvpr24/">EgoVis workshop</a> at CVPR 2024.
@@ -415,7 +475,7 @@
           </div>
         </td>
         <td style="padding:20px;width:75%;vertical-align:middle">
-          <a href=>
+          <a href="https://4dqv.mpi-inf.mpg.de/EventEgo3D">
             <h3 class="papertitle">
               <strong>EventEgo3D: 3D Human Motion Capture from Egocentric Event Streams</strong>
             </h3>
@@ -425,7 +485,7 @@
           <br>
           <em>Computer Vision and Pattern Recognition (CVPR)</em>, 2024
           <br>
-          <a href="https://4dqv.mpi-inf.mpg.de/EventEgo3D/">[Project page]</a>
+          <a href="https://4dqv.mpi-inf.mpg.de/EventEgo3D">[Project page]</a>
           <a href="https://arxiv.org/abs/2404.08640">[Paper]</a>
           <a href="https://github.com/Chris10M/EventEgo3D">[Code]</a>
           <p>
@@ -453,7 +513,7 @@
             </div>
         </td>
         <td style="padding:20px;width:75%;vertical-align:middle">
-          <a href=>
+          <a href="https://4dqv.mpi-inf.mpg.de/Ev2Hands">
             <h3 class="papertitle">
               <strong>3D Pose Estimation of Two Interacting Hands from a Monocular Event Camera</strong>
             </h3>
@@ -532,10 +592,19 @@
             <heading>Professional Services & Activities</heading>
             </p>
             <p>
-              <b>Thesis Students (Past and Present):</b> <br>
+              <b>Thesis Students:</b> <br>
+                <ul>
+                <li>Darshankumar Asodariya (ongoing)</li>
+                <li>Sanjit Shashikant Chavan (Capturing and Detecting Micro Gestures Using Head-Mounted Devices, 2026)</li>
+                <li>Vippin Kumar Jeetmal (Multi-view Face and Gesture Animation with Dynamic Gaussians, 2025)</li>
+                </ul>
             </p>
             <p>
               <b>Teaching:</b> <br>
+                <ul>
+                    <li><a href="https://av.cs.rptu.de/teaching/current-semester/seminars-projects-and-guided-research">Computer Vision & Deep Learning (2024-) </a></li>
+                    <li><a href="https://av.cs.rptu.de/teaching/current-semester/advanced-topics-in-computer-vision-and-deep-learning">Advanced Topics in Computer Vision and Deep Learning (2024-) </a></li>
+                </ul>
             </p>
             
             <p>
@@ -572,7 +641,7 @@
                         src='//cdn.clustrmaps.com/map_v2.js?cl=c9c1c1&w=200&t=n&d=j0j_3rEh4HCvS5DIxlRJ3P9J8yp0mtUeDLZ6Z6I2NJ8&co=ffffff&cmo=ea8d7a&cmn=1772d0&ct=000000'></script>
                     </p> -->
               <p style="text-align:center;font-size:small;">
-              © Christen Millerdurai 2026 /
+              © Christen Millerdurai <span id="copyright-year"></span> /
               Design: <a href="https://github.com/jonbarron/jonbarron_website">jonbarron</a>
               Icons: <a href="https://www.flaticon.com/free-icons/sushi" title="sushi icons">Freepik - Flaticon</a>
             </p>
