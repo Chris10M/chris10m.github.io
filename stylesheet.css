@@ -79,6 +79,20 @@ figure {
   /* margin: auto; */
 }
 
+.pub-hidden { display: none; }
+
+.pub-toggle {
+  background: #111;
+  color: #fff;
+  border: 0;
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.pub-toggle:hover { background: #222; }
+
 img {
   max-width: 800px;
   /* max-height: 800px; */
