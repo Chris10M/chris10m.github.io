@@ -52,41 +52,64 @@
   </script>
   <script type="text/javascript">
     window.addEventListener('DOMContentLoaded', function () {
-      const items = Array.from(document.querySelectorAll('.pub-item'));
-      const toggle = document.getElementById('pub-toggle');
-      const toggleRow = document.getElementById('pub-toggle-row');
       const year = document.getElementById('copyright-year');
-      const visibleCount = 3;
-      let expanded = false;
 
-      function update() {
-        items.forEach((item, idx) => {
-          item.classList.toggle('pub-hidden', !expanded && idx >= visibleCount);
-        });
-        if (toggleRow && items.length) {
-          const parent = items[0].parentNode;
-          const targetIndex = expanded ? items.length - 1 : Math.min(visibleCount, items.length) - 1;
-          const target = items[targetIndex];
-          parent.insertBefore(toggleRow, target.nextSibling);
+      function initExpandableSection(config) {
+        const items = Array.from(document.querySelectorAll(config.itemSelector));
+        const toggle = document.getElementById(config.toggleId);
+        const toggleRow = document.getElementById(config.toggleRowId);
+        const visibleCount = config.visibleCount || 3;
+        let expanded = false;
+
+        function update() {
+          items.forEach((item, idx) => {
+            item.classList.toggle('pub-hidden', !expanded && idx >= visibleCount);
+          });
+
+          if (toggleRow) {
+            toggleRow.style.display = items.length > visibleCount ? '' : 'none';
+          }
+
+          if (toggleRow && items.length) {
+            const parent = items[0].parentNode;
+            const targetIndex = expanded ? items.length - 1 : Math.min(visibleCount, items.length) - 1;
+            const target = items[targetIndex];
+            parent.insertBefore(toggleRow, target.nextSibling);
+          }
+
+          if (toggle) {
+            toggle.textContent = expanded ? 'Show less' : 'Show more';
+            toggle.style.display = items.length > visibleCount ? 'inline-block' : 'none';
+          }
         }
+
         if (toggle) {
-          toggle.textContent = expanded ? 'Show less' : 'Show more';
-          toggle.style.display = items.length > visibleCount ? 'inline-block' : 'none';
+          toggle.addEventListener('click', function () {
+            expanded = !expanded;
+            update();
+          });
         }
+
+        update();
       }
 
-      if (toggle) {
-        toggle.addEventListener('click', function () {
-          expanded = !expanded;
-          update();
-        });
-      }
+      initExpandableSection({
+        itemSelector: '.news-item',
+        toggleId: 'news-toggle',
+        toggleRowId: 'news-toggle-row',
+        visibleCount: 3
+      });
+
+      initExpandableSection({
+        itemSelector: '.pub-item',
+        toggleId: 'pub-toggle',
+        toggleRowId: 'pub-toggle-row',
+        visibleCount: 3
+      });
 
       if (year) {
         year.textContent = String(new Date().getFullYear());
       }
-
-      update();
     });
   </script>
   <script type="application/ld+json">
@@ -252,26 +275,38 @@
       <tr>
         <td style="padding:20px;width:100%;vertical-align:middle">
           <heading>News</heading>
-          <p>
-            <b>[Feb 2026]</b> One paper got accepted in CVPR 2026.
-            <br>
+          <p class="news-item">
+            <b>[May 2026]</b> Inpaint360GS was invited to a poster session in <a
+              href="https://www.spar3d.org/">SPAR-3D workshop</a> at CVPR 2026.
+          </p>
+          <p class="news-item">
+            <b>[April 2026]</b> One paper got accepted in SIGGRAPH 2026.
+          </p>
+          <p class="news-item">
+            <b>[February 2026]</b> One paper got accepted in CVPR 2026.
+          </p>
+          <p class="news-item">
             <b>[December 2025]</b> Two papers got accepted in WACV 2026.
-            <br>
+          </p>
+          <p class="news-item">
             <b>[June 2025]</b> One paper got published in IJCV 2025.
-            <br>
+          </p>
+          <p class="news-item">
             <b>[December 2024]</b> One paper got accepted in WACV 2025.
-            <br>
+          </p>
+          <p class="news-item">
             <b>[May 2024]</b> EventEgo3D was invited to a poster session in <a
               href="https://egovis.github.io/cvpr24/">EgoVis workshop</a> at CVPR 2024.
-            <br>
-            <b>[Feb 2024]</b> One paper got accepted to CVPR 2024.
-            <br>
-            <b>[Dec 2023]</b> One paper got accepted to 3DV 2024 (<b style="color:red">Spotlight</b>).
-            <br>
-            <!-- <details>
-                        <summary>Past updates</summary>
-                      </details> -->
           </p>
+          <p class="news-item">
+            <b>[February 2024]</b> One paper got accepted to CVPR 2024.
+          </p>
+          <p class="news-item">
+            <b>[December 2023]</b> One paper got accepted to 3DV 2024 (<b style="color:red">Spotlight</b>).
+          </p>
+          <div id="news-toggle-row" class="news-toggle-row">
+            <button id="news-toggle" type="button" class="pub-toggle news-toggle">Show more</button>
+          </div>
 
         </td>
       </tr>
@@ -324,11 +359,40 @@
         style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
 
 
+      <tbody class="pub-item">
+        <td style="padding:20px;width:25%;vertical-align:middle">
+          <div class="one">
+            <img src="projects/siggraph2026_egoforce/egoforce.gif" width="195">
+          </div>
+        </td>
+        <td style="padding:20px;width:75%;vertical-align:middle">
+          <a href="https://dfki-av.github.io/EgoForce/">
+            <h3 class="papertitle">
+              <strong>EgoForce: Forearm-Guided Camera-Space 3D Hand Pose from a Monocular Egocentric Camera</strong>
+            </h3>
+          </a>
+          <b>Christen Millerdurai</b>, Shaoxiang Wang, Yaxu Xie, Vladislav Golyanik, Didier Stricker, Alain Pagani          
+          <br>
+          <em>ACM SIGGRAPH Conference Proceedings</em>, 2026
+          <br>
+          <a href="https://dfki-av.github.io/EgoForce/">[Project page]</a>
+          <a href="https://arxiv.org/pdf/2605.12498">[Paper]</a>
+          <a href="https://github.com/dfki-av/EgoForce">[Code]</a>
+          <p>
+            Absolute 3D hand pose and shape reconstruction from a single head-mounted camera is essential for smart-glasses-based AR, telepresence, and hand-centric manipulation.
+            However, monocular RGB methods suffer from depth–scale ambiguity and poor generalization across diverse head-mounted camera models, often requiring costly device-specific training data. 
+            We introduce EgoForce, a unified monocular 3D hand reconstruction framework that recovers robust camera-space hand pose and position across fisheye, perspective, and distorted wide-FOV cameras. 
+            EgoForce combines a differentiable forearm representation, a unified arm–hand transformer, and a ray-space closed-form solver to stabilize pose estimation and resolve absolute 3D geometry across camera models.
+          </p>
+        </td>
+      </tbody>
+      
+
 
       <tbody class="pub-item">
         <td style="padding:20px;width:25%;vertical-align:middle">
           <div class="one">
-            <img src="projects/cvpr2026_ReLaGS/ReLaGS.gif" width="230">
+            <img src="projects/cvpr2026_ReLaGS/ReLaGS.gif" width="195">
           </div>
         </td>
         <td style="padding:20px;width:75%;vertical-align:middle">
@@ -361,7 +425,7 @@
       <tbody class="pub-item">
         <td style="padding:20px;width:25%;vertical-align:middle">
           <div class="one">
-            <img src="projects/wacv2026_TalkingPose/talkingpose.gif" width="185">
+            <img src="projects/wacv2026_TalkingPose/talkingpose.gif" width="195">
           </div>
         </td>
         <td style="padding:20px;width:75%;vertical-align:middle">
@@ -426,7 +490,7 @@
       <tbody class="pub-item">
         <td style="padding:20px;width:25%;vertical-align:middle">
           <div class="one">
-            <img src="projects/ijcv2025_eventego3dpp/EventEgo3D++.png" width="180">
+            <img src="projects/ijcv2025_eventego3dpp/EventEgo3D++.png" width="195">
           </div>
         </td>
         <td style="padding:20px;width:75%;vertical-align:middle">
@@ -468,7 +532,7 @@
         <tbody class="pub-item">
           <td style="padding:20px;width:25%;vertical-align:middle">
             <div class="one">
-              <img src="projects/wacv_2025_unislam/unislam.gif" width="180">
+              <img src="projects/wacv_2025_unislam/unislam.gif" width="195">
           </div>
         </td>
         <td style="padding:20px;width:75%;vertical-align:middle">
@@ -502,7 +566,7 @@
       <tbody class="pub-item">
         <td style="padding:20px;width:25%;vertical-align:middle">
           <div class="one">
-            <img src="projects/cvpr2024_eventego3d/EventEgo_ICON1.gif" width="180">
+            <img src="projects/cvpr2024_eventego3d/EventEgo_ICON1.gif" width="195">
           </div>
         </td>
         <td style="padding:20px;width:75%;vertical-align:middle">
@@ -540,7 +604,7 @@
         <tbody class="pub-item">
           <td style="padding:20px;width:25%;vertical-align:middle">
             <div class="one">
-              <img src="projects/3dv2024_ev2hands/Ev2Hands_3DV2024L.gif" width="180">
+              <img src="projects/3dv2024_ev2hands/Ev2Hands_3DV2024L.gif" width="195">
             </div>
         </td>
         <td style="padding:20px;width:75%;vertical-align:middle">
@@ -717,8 +781,6 @@
 
 
 </html>
-
-
 
 
 
