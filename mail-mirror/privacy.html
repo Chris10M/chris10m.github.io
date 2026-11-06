@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy policy | Personal Mail Mirror</title>
+<meta name="description" content="Information about a personal one-way mailbox archive utility and its handling of Google account data.">
+<style>
+:root{color-scheme:light;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#152238;background:#f7f9fc}
+*{box-sizing:border-box}body{margin:0;line-height:1.65}main{max-width:790px;margin:5rem auto 7rem;padding:0 1.5rem}h1{font-size:clamp(2rem,5vw,3.2rem);line-height:1.15;letter-spacing:-.04em;margin:.5rem 0 1.2rem}h2{font-size:1.3rem;margin-top:2.25rem}p,li{font-size:1rem}small,.eyebrow{color:#52647c}.eyebrow{font-weight:650;letter-spacing:.1em;text-transform:uppercase;font-size:.8rem}a{color:#245ca6;text-underline-offset:.18em}a:hover{color:#163e79}.lead{font-size:1.14rem;color:#3a4c63}.panel{border:1px solid #d8e1ec;background:#fff;border-radius:16px;padding:1.4rem 1.6rem;margin:1.7rem 0}nav{display:flex;gap:1.2rem;flex-wrap:wrap;margin:1.5rem 0 2.7rem}footer{margin-top:3rem;border-top:1px solid #d8e1ec;padding-top:1.1rem;color:#52647c;font-size:.9rem}ul{padding-left:1.5rem}code{background:#edf2f8;padding:.1rem .35rem;border-radius:5px}@media(max-width:600px){main{margin:2.5rem auto 4rem}.panel{padding:1rem}}
+</style></head><body><main>
+<div class="eyebrow">Independent personal utility</div>
+<nav aria-label="Project navigation"><a href="./">Overview</a><a href="./privacy.html">Privacy policy</a><a href="./terms.html">Terms</a><a href="https://chris10m.github.io/">Maintainer website</a></nav>
+
+<h1>Privacy policy</h1>
+<p class="lead">This policy describes how Personal Mail Mirror handles mailbox information. It covers the local mirror utility, not Google's Gmail product, Yahoo Mail, or other services you connect separately.</p>
+<h2>Who operates this utility?</h2>
+<p>Personal Mail Mirror is an independent, single-user utility maintained by <a href="https://chris10m.github.io/">Christen Millerdurai</a> for archiving the owner's email. It is not a hosted service for other users.</p>
+<h2>Data accessed and its purpose</h2>
+<p>Using the owner's consent and local credentials, the utility accesses Yahoo messages via read-only IMAP, including headers, message bodies, folders, dates, initial read/unread flags, and attachments. It uses Google OAuth for the Gmail API to create an archival copy of those messages in the owner's dedicated Gmail mailbox and to apply corresponding labels.</p>
+<p>The current Google scope is <code>https://www.googleapis.com/auth/gmail.modify</code>. This permission permits broader access than the mirror's currently implemented operations; the mirror code is intended to insert messages, create labels, and add labels, and to verify the authorized account's identity. It is not intended to send messages or delete user mail.</p>
+<h2>Storage and retention</h2>
+<ul>
+<li><strong>Destination mailbox:</strong> copied email content and attachments are retained by Google in the owner's Gmail account until the owner removes them under Gmail's policies.</li>
+<li><strong>Local workstation:</strong> a local SQLite ledger retains source folder identifiers, message identifiers, content hashes, destination message IDs, and sync state. Yahoo app credentials and Google OAuth credentials/tokens are stored in local private configuration/state files. Message contents are processed transiently by the sync process rather than kept as a second local email archive.</li>
+<li><strong>Source mailbox:</strong> the mirror reads Yahoo without deleting or modifying source messages.</li>
+<li><strong>Public website:</strong> these information pages do not collect mailbox content, passwords or tokens, and do not include application analytics or tracking scripts. Hosting infrastructure may keep ordinary access logs under its own policies.</li>
+</ul>
+<h2>Sharing, third parties and Google API data</h2>
+<p>Email data is transmitted between the owner's Yahoo account, the owner's workstation, and the owner's Gmail account for the purpose of creating the archive. The mirror does not intentionally sell email data, use it for advertising, transfer it to independent data brokers, or use it to train generalized AI models. It is not a third-party mailbox-sharing service.</p>
+<p>The owner may independently connect Gmail to another application, including an AI assistant. Such a separate connection is not part of this mirror and follows that application's separate authorization and privacy terms.</p>
+<p>Use of data received from Google APIs is limited to providing and maintaining the functionality described here, consistent with the <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>.</p>
+<h2>Security and control</h2>
+<p>Connections use provider-supported encrypted protocols. Credentials and synchronization metadata are stored on the owner's workstation, subject to its operating-system security. The owner's device, operating system account and storage protections are essential; this utility does not guarantee protection against a compromised machine.</p>
+<h2>Stopping the mirror and deleting data</h2>
+<p>The owner can stop the local background timer, revoke Google's OAuth grant from Google Account security settings, and revoke the Yahoo app password from Yahoo Account security settings. The owner can delete local configuration, OAuth tokens and synchronization metadata, and separately delete copied messages in Gmail. Stopping the utility does not automatically delete Gmail copies; deleting the local ledger without planning a migration may cause duplicate imports if the utility runs again.</p>
+<h2>Changes and contact</h2>
+<p>This document will be updated if the utility's data-handling behavior changes. For inquiries, contact the maintainer using the <a href="https://github.com/Chris10M">GitHub profile</a> linked here.</p>
+<footer>Personal Mail Mirror is an independent, single-user project maintained by <a href="https://chris10m.github.io/">Christen Millerdurai</a>. It is not affiliated with Yahoo or Google. Last updated November 6, 2026.</footer></main></body></html>
