@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Overview | Personal Mail Mirror</title>
+<meta name="description" content="Information about a personal one-way mailbox archive utility and its handling of Google account data.">
+<style>
+:root{color-scheme:light;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#152238;background:#f7f9fc}
+*{box-sizing:border-box}body{margin:0;line-height:1.65}main{max-width:790px;margin:5rem auto 7rem;padding:0 1.5rem}h1{font-size:clamp(2rem,5vw,3.2rem);line-height:1.15;letter-spacing:-.04em;margin:.5rem 0 1.2rem}h2{font-size:1.3rem;margin-top:2.25rem}p,li{font-size:1rem}small,.eyebrow{color:#52647c}.eyebrow{font-weight:650;letter-spacing:.1em;text-transform:uppercase;font-size:.8rem}a{color:#245ca6;text-underline-offset:.18em}a:hover{color:#163e79}.lead{font-size:1.14rem;color:#3a4c63}.panel{border:1px solid #d8e1ec;background:#fff;border-radius:16px;padding:1.4rem 1.6rem;margin:1.7rem 0}nav{display:flex;gap:1.2rem;flex-wrap:wrap;margin:1.5rem 0 2.7rem}footer{margin-top:3rem;border-top:1px solid #d8e1ec;padding-top:1.1rem;color:#52647c;font-size:.9rem}ul{padding-left:1.5rem}code{background:#edf2f8;padding:.1rem .35rem;border-radius:5px}@media(max-width:600px){main{margin:2.5rem auto 4rem}.panel{padding:1rem}}
+</style></head><body><main>
+<div class="eyebrow">Independent personal utility</div>
+<nav aria-label="Project navigation"><a href="./">Overview</a><a href="./privacy.html">Privacy policy</a><a href="./terms.html">Terms</a><a href="https://chris10m.github.io/">Maintainer website</a></nav>
+
+<h1>Personal Mail Mirror</h1>
+<p class="lead">A private workstation utility that makes a one-way archival copy of email from an owner-controlled Yahoo mailbox into a dedicated Gmail account.</p>
+<section class="panel"><h2>What the application does</h2>
+<ul>
+<li>Connects to the owner's Yahoo mailbox using a separate app password and read-only IMAP.</li>
+<li>Copies selected message content, original dates, headers, and attachments into the owner's dedicated Gmail account through the Gmail API.</li>
+<li>Creates Gmail labels corresponding to source folders and keeps local synchronization metadata to reduce duplicate imports.</li>
+<li>Runs periodically on the owner's own computer. The source Yahoo mailbox remains unchanged.</li>
+</ul></section>
+<h2>Why Google account access is requested</h2>
+<p>Google OAuth is used solely to authorize a private Gmail destination for archived messages. The application currently requests the <code>gmail.modify</code> scope, which is broader than the operations this utility performs. The implemented mirror imports messages, creates labels and adds labels to imported messages. It is not designed to send email, delete Gmail messages, or delete or modify Yahoo messages.</p>
+<h2>Scope and limitations</h2>
+<p>This application is for personal use by its owner. It is not a public email service and offers no public sign-up. It is an additive archive rather than a bidirectional mailbox synchronization system: source-side deletions, moves, and later read/unread changes are not necessarily reflected in the Gmail copy. The workstation must be on and connected for synchronization to run.</p>
+<h2>Data and privacy</h2>
+<p>The copied mail is stored in the owner's Gmail account. Local configuration holds authentication credentials, and a local database stores message identifiers and synchronization state. This public website does not log into either mailbox, host messages, or request credentials.</p>
+<p>Read the <a href="./privacy.html">privacy policy</a> for information about data access, retention, sharing and revocation, and the <a href="./terms.html">terms of use</a> for operating limitations.</p>
+<h2>Maintainer</h2><p>This independent personal project is maintained by <a href="https://chris10m.github.io/">Christen Millerdurai</a>. Questions can be directed through the maintainer's public <a href="https://github.com/Chris10M">GitHub profile</a>.</p>
+<footer>Personal Mail Mirror is an independent, single-user project maintained by <a href="https://chris10m.github.io/">Christen Millerdurai</a>. It is not affiliated with Yahoo or Google. Last updated November 6, 2026.</footer></main></body></html>
